@@ -20,7 +20,7 @@
             position: fixed;
             bottom: 0;
         }
-        #send_message{
+        #sent_message{
             width: 150px;
             font-size: 20px;
             color: white;
@@ -58,7 +58,7 @@
         </div>
         <div id="send">
             <input type="text" id="message">
-            <input type="text" value="Отправить" id="send_message">
+            <input type="button" value="Отправить" id="sent_message">
         </div>
     </div>
     <script>
@@ -72,10 +72,28 @@
                 behavior:'smooth',
             });
         }
-
-        for(let i=0; i<25; i++){
-            newMessage('Текущее сообщение'+i);
+        function sendMessage() {
+            let message = document.querySelector('#message');
+            let text = message.value;
+            if (text.trim().length >0){
+                newMessage(text);
+                message.value = ' ';
+            }
         }
+        function sendMessageKeyUp(e){
+            if (e.code == 'Enter'){
+                sendMessage();
+            }
+            
+        }
+        window.onload = ()=> {
+            document.querySelector('#sent_message').onclick = sendMessage; 
+            document.querySelector('#message').onkeyup = sendMessageKeyUp;
+        }
+
+       // for(let i=0; i<25; i++){
+       //     newMessage('Текущее сообщение'+i);
+       // }
     </script>
 </body>
 </html>
